@@ -1,0 +1,14 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "fastify": "^2.7.1",
+    "fastify-cors": "^3.0.3"
+  },
+  "devDependencies": {
+    "fastify-metrics": "^5.0.1"
+  }
+}
