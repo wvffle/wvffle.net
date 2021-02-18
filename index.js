@@ -1,3 +1,4 @@
+const { promises: fs } = require('fs')
 const fastify = require('fastify')({
   logger: true
 })
@@ -8,6 +9,10 @@ fastify.register(require('fastify-cors'), {
   origin: [
     /\.wvffle\.net$/
   ]
+})
+
+fastify.get('/favicon.ico', async (request, reply) => {
+  return fs.readFile('favicon.ico')
 })
 
 fastify.get('/', async (request, reply) => {
@@ -32,8 +37,9 @@ fastify.get('/', async (request, reply) => {
           .links-right>div{padding:.5rem}
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-fira-mono@0.0.72/index.min.css">
-        <script async defer data-domain="wvffle.net" src="https://plausible.motyka.pro/js/plausible.js"></script>
         <script async defer src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js"></script>
+        <noscript><img src="https://stats.wvffle.net/ingress/8abfdc8a-0eb5-43bd-ae40-8230ae407ef4/pixel.gif"></noscript>
+        <script async defer src="https://stats.wvffle.net/ingress/8abfdc8a-0eb5-43bd-ae40-8230ae407ef4/script.js"></script>
       </head>
 
       <body>
