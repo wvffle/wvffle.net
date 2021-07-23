@@ -21,6 +21,14 @@ fastify.get('/.well-known/matrix/server', async (request, reply) => {
   }
 })
 
+fastify.get('/.well-known/matrix/client', async (request, reply) => {
+  return {
+    "m.homeserver": {
+      base_url: "https://matrix.wvffle.net"
+    }
+  }
+})
+
 fastify.get('*', async (request, reply) => {
   reply.type('html')
   return fs.readFile('index.html')
