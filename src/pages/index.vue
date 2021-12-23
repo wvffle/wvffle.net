@@ -7,38 +7,26 @@
             <div class="transform -skew-x-4 bg-[#a7561e] translate-x-8 absolute inset-0 -z-1" />
             <div class="transform -skew-x-4 bg-[#ffa621] shadow-2xl translate-x-12 absolute inset-0 -z-1" />
             <div class="w-full bg-gray-700 rounded-md max-w-2xl mx-auto overflow-hidden">
-                <div class="flex border-b border-gray-500">
-                    <div @click="tab = 'wvffle.vue'" :class="tab === 'wvffle.vue' ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class=" py-2 px-4 flex items-center cursor-pointer">
-                        <img src="../assets/vue.png" class="h-[2ch] mr-2 block" />
-                        <div class="mr-2">
-                            wvffle.vue
-                        </div>
-                        <div class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
+                <div class="flex border-b border-gray-500 h-[41px]">
+                    <template v-for="(content, tab) in tabs" :key="content">
+                    <div v-if="tab !== 'nope'" @click="current = tab" :class="current === tab ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class="py-2 px-4 flex items-center cursor-pointer">
+                        <img v-if="tab.endsWith('.vue')" src="../assets/vue.png" class="h-[2ch] mr-2 block" />
+                        <img v-if="tab.endsWith('.md')" src="../assets/md.png" class="h-[2ch] mr-2 block" />
+                        <div class="mr-2">{{ tab }}</div>
+                        <div @click.stop="close(tab)" class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
                     </div>
-
-                    <div @click="tab = 'projects.md'" :class="tab === 'projects.md' ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class=" py-2 px-4 flex items-center cursor-pointer">
-                        <img src="../assets/md.png" class="h-[2ch] mr-2 block" />
-                        <div class="mr-2">
-                            projects.md
-                        </div>
-                        <div class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
-                    </div>
-
-                    <div @click="tab = 'contact.md'" :class="tab === 'contact.md' ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class=" py-2 px-4 flex items-center cursor-pointer">
-                        <img src="../assets/md.png" class="h-[2ch] mr-2 block" />
-                        <div class="mr-2">
-                            contact.md
-                        </div>
-                        <div class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
-                    </div>
+                    </template>
                 </div>
-                <pre class="text-sm text-white p-2 px-4 shadow-xl h-136 overflow-y-scroll"><code v-html="tabs[tab]" /></pre>
+                <pre v-if="current !== 'nope'" class="text-sm text-white p-2 px-4 shadow-xl h-136 overflow-y-scroll"><code v-html="tabs[current]" /></pre>
+                <div v-else class="text-lg font-bold flex items-center justify-center h-136 overflow-y-scroll text-gray-800 p-2 px-4 shadow-xl">
+                    You've closed everything, eh?
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-markdown.js'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -111,10 +99,26 @@ const contact = `# contact
 #### email
 - contact[at]wvffle[dot]net`
 
-const tabs = {
+const tabs = reactive({
     'wvffle.vue': Prism.highlight(devSFC, Prism.languages.html, 'html'),
     'projects.md': Prism.highlight(projects, Prism.languages.md, 'md'),
     'contact.md': Prism.highlight(contact, Prism.languages.md, 'md'),
+    'nope': 'nope'
+})
+const current = ref(Object.keys(tabs)[0])
+
+const close = tab => {
+    const keys = Object.keys(tabs)
+    const idx = keys.indexOf(tab)
+
+    delete tabs[tab]
+
+    if (current.value === tab) {
+        current.value = idx === 0 
+            ? keys[idx + 1]
+            : keys[idx - 1] ?? keys[idx]
+    }
+
+    console.log(current.value)
 }
-const tab = ref(Object.keys(tabs)[0])
 </script>
