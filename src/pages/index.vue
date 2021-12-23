@@ -23,15 +23,24 @@
                         </div>
                         <div class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
                     </div>
+
+                    <div @click="tab = 'contact.md'" :class="tab === 'contact.md' ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class=" py-2 px-4 flex items-center cursor-pointer">
+                        <img src="../assets/md.png" class="h-[2ch] mr-2 block" />
+                        <div class="mr-2">
+                            contact.md
+                        </div>
+                        <div class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
+                    </div>
                 </div>
-                <pre class="text-sm text-white p-2 px-4 shadow-xl"><code v-html="tabs[tab]" /></pre>
+                <pre class="text-sm text-white p-2 px-4 shadow-xl h-136 overflow-y-scroll"><code v-html="tabs[tab]" /></pre>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import prism from 'prismjs'
+import Prism from 'prismjs'
+import 'prismjs/components/prism-markdown.js'
 import 'prismjs/themes/prism-tomorrow.css'
 
 const devSFC = `<script setup>
@@ -61,20 +70,16 @@ const devSFC = `<script setup>
     })
 &lt;/script>`.replace('&lt;', '<')
 
-console.log(prism.languages)
-const tabs = {
-    'wvffle.vue': prism.highlight(devSFC, prism.languages.html, 'html'),
-
-    // TODO: Add prism for markdown
-    'projects.md': `# my projects
+const projects = `# my projects
 
 #### 2021
 - [pb.wvffle.net](https://pb.wvffle.net)
 - [bosohandmade.pl](https://bosohandmade.pl)
 - [radon2 maven plugin](https://github.com/wvffle/radon2-maven-plugin)
+- [wspinanie.bialystok.pl](https://wspinanie.bialystok.pl)
 
 #### 2020
-- [wspinanie.bialystok.pl](https://wspinanie.bialystok.pl)
+- [wspinanie.bialystok.pl](http://cwflash.surge.sh)
 - [wyjebalo.net](https://wyjebalo.net)
 
 #### 2019
@@ -83,6 +88,7 @@ const tabs = {
 
 #### 2018
 - [rehabilitacja-dzieci.com.pl](https://rehabilitacja-dzieci.com.pl)
+- [obsessionbielsko.surge.sh](http://obsessionbielsko.surge.sh)
 
 #### 2017
 - [wvffle.net](https://wvffle.net) 
@@ -93,7 +99,22 @@ const tabs = {
 - [css coffee cup](https://codepen.io/wvffle/pen/xOZbpX)
 
 #### 2015
-- [waff-query](https://github.com/wvffle/waff-query)` 
+- [waff-query](https://github.com/wvffle/waff-query)`
+
+const contact = `# contact
+#### matrix
+- @waff:wvffle.net
+
+#### telegram
+- [wvffle](https://t.me/wvffle)
+
+#### email
+- contact[at]wvffle[dot]net`
+
+const tabs = {
+    'wvffle.vue': Prism.highlight(devSFC, Prism.languages.html, 'html'),
+    'projects.md': Prism.highlight(projects, Prism.languages.md, 'md'),
+    'contact.md': Prism.highlight(contact, Prism.languages.md, 'md'),
 }
 const tab = ref(Object.keys(tabs)[0])
 </script>
