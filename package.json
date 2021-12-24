@@ -3,17 +3,14 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vitedge --ssr",
-    "dev:spa": "vitedge",
-    "preview": "vitedge preview",
-    "preview:watch": "vitedge preview --build-watch",
-    "build": "rm -rf dist && vitedge build"
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "vite build"
   },
   "dependencies": {
     "@vue/server-renderer": "3",
     "@vueuse/head": "^0.7.4",
     "prismjs": "^1.25.0",
-    "vitedge": "^0.17.3",
     "vue": "^3",
     "vue-router": "^4.0.0"
   },

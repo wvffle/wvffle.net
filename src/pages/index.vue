@@ -118,7 +118,5 @@ const close = tab => {
             ? keys[idx + 1]
             : keys[idx - 1] ?? keys[idx]
     }
-
-    console.log(current.value)
 }
 </script>
