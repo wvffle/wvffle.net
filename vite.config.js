@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     vue(), 
     pages(),
-    layouts.default(),
+    layouts(),
     windicss()
   ]
 })
