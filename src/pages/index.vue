@@ -38,14 +38,14 @@ const devSFC = `<script setup>
     const experience = computed(() => currentYear - 2010)
 
     const skills = reactive([
-        'vue', 'windicss', 'graphql',
-        'javascript', 'java', 'python',
-        'docker', 'haproxy', 'cloudflare'
+        'vue', 'unocss', 'graphql', 'apollo',
+        'typescript', 'javascript', 'python', 
+        'java','docker', 'haproxy', 'cloudflare'
     ])
 
     const tools = reactive([
-        'archlinux', 'neovim', 'intellij idea',
-        'yarn', 'vite', 'git'
+        'archlinux', 'neovim', 'git', 'gitpod',
+        'intellij idea', 'pnpm', 'yarn', 'vite'
     ])
 
     // NOTE: A Vue 3 developer
@@ -59,6 +59,9 @@ const devSFC = `<script setup>
 &lt;/script>`.replace('&lt;', '<')
 
 const projects = `# my projects
+#### 2022
+- [Funkwhale fronted](https://demo.funkwhale.audio)
+- [Funkwhale components](https://ui.funkwhale.audio)
 
 #### 2021
 - [pb.wvffle.net](https://pb.wvffle.net)
@@ -91,13 +94,13 @@ const projects = `# my projects
 
 const contact = `# contact
 #### matrix
-- @waff:wvffle.net
+- @waff:juniorjpdj.pl
 
 #### telegram
 - [wvffle](https://t.me/wvffle)
 
 #### email
-- contact[at]wvffle[dot]net`
+- admin[at]wvffle[dot]net`
 
 const tabs = reactive({
     'wvffle.vue': Prism.highlight(devSFC, Prism.languages.html, 'html'),
