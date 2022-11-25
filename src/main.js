@@ -6,6 +6,9 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import 'virtual:windi.css'
 
+import Toast from "vue-toastification"
+import "vue-toastification/dist/index.css"
+
 const routes = setupLayouts(generatedRoutes)
 console.log(routes)
 
@@ -16,6 +19,7 @@ app.use(createRouter({
     routes,
 }))
 
+app.use(Toast)
 app.use(createHead())
 
 app.mount('#app')

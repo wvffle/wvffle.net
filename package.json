@@ -12,7 +12,8 @@
     "@vueuse/head": "^1.0.13",
     "prismjs": "^1.29.0",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue-toastification": "2.0.0-rc.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",

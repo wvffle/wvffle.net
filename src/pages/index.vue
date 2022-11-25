@@ -1,37 +1,18 @@
-<template>
-    <div class="grid grid-cols-3 min-h-[100vh] shadow-lg bg-white relative z-1">
-        <div class="flex items-center justify-center">
-            <img src="../assets/logo.svg" />
-        </div>
-        <div class="relative overflow-hidden col-span-2 flex items-center justify-center">
-            <div class="transform -skew-x-4 bg-[#a7561e] translate-x-8 absolute inset-0 -z-1" />
-            <div class="transform -skew-x-4 bg-[#ffa621] shadow-2xl translate-x-12 absolute inset-0 -z-1" />
-            <div class="w-full bg-gray-700 rounded-md max-w-2xl mx-auto overflow-hidden">
-                <div class="flex border-b border-gray-500 h-[41px]">
-                    <template v-for="(content, tab) in tabs" :key="content">
-                    <div v-if="tab !== 'nope'" @click="current = tab" :class="current === tab ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class="py-2 px-4 flex items-center cursor-pointer">
-                        <img v-if="tab.endsWith('.vue')" src="../assets/vue.png" class="h-[2ch] mr-2 block" />
-                        <img v-if="tab.endsWith('.md')" src="../assets/md.png" class="h-[2ch] mr-2 block" />
-                        <div class="mr-2">{{ tab }}</div>
-                        <div @click.stop="close(tab)" class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
-                    </div>
-                    </template>
-                </div>
-                <pre v-if="current !== 'nope'" class="text-sm text-white p-2 px-4 shadow-xl h-136 overflow-y-scroll"><code v-html="tabs[current]" /></pre>
-                <div v-else class="text-lg font-bold flex items-center justify-center h-136 overflow-y-scroll text-gray-800 p-2 px-4 shadow-xl">
-                    You've closed everything, eh?
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
 <script setup>
-import { ref, onMounted, reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-markdown.js'
 import 'prismjs/themes/prism-tomorrow.css'
 
-const devSFC = `<script setup>
+import { useToast } from "vue-toastification"
+
+const toast = useToast()
+toast('Czy Adrianowi uda sie przyjac 15 nowych czlonkow?', {
+    type: 'error',
+    position: 'bottom-center'
+})
+
+const devSFC = `<script setup lang="ts">
     import { computed, readonly, reactive } from 'vue'
 
     const currentYear = new Date().getFullYear()
@@ -108,6 +89,7 @@ const tabs = reactive({
     'contact.md': Prism.highlight(contact, Prism.languages.md, 'md'),
     'nope': 'nope'
 })
+
 const current = ref(Object.keys(tabs)[0])
 
 const close = tab => {
@@ -123,3 +105,31 @@ const close = tab => {
     }
 }
 </script>
+
+<template>
+    <div class="md:grid grid-cols-3 min-h-[100vh] overflow-hidden shadow-lg bg-white relative z-1">
+        <div class="flex items-center justify-center p-12">
+            <img src="../assets/logo.svg" />
+        </div>
+        <div class="relative col-span-2 flex items-center justify-center p-8">
+            <div class="transform md:(-skew-x-4 translate-x-8) bg-[#a7561e] <md:(-skew-y-4 translate-y-8) absolute inset-0 -z-1" />
+            <div class="transform md:(-skew-x-4 translate-x-12) bg-[#ffa621] shadow-2xl <md:(-skew-y-4 translate-y-12) absolute inset-0 -z-1" />
+            <div class="w-full bg-gray-700 rounded-md max-w-2xl mx-auto overflow-hidden">
+                <div class="flex border-b border-gray-500 h-[41px]">
+                    <template v-for="(content, tab) in tabs" :key="content">
+                    <div v-if="tab !== 'nope'" @click="current = tab" :class="current === tab ? 'text-[#ffa621] bg-gray-600' : 'text-gray-400'" class="py-2 px-4 flex items-center cursor-pointer">
+                        <img v-if="tab.endsWith('.vue')" src="../assets/vue.png" class="h-[2ch] mr-2 block" />
+                        <img v-if="tab.endsWith('.md')" src="../assets/md.png" class="h-[2ch] mr-2 block" />
+                        <div class="mr-2">{{ tab }}</div>
+                        <div @click.stop="close(tab)" class="h-4 w-4 rounded-full cursor-pointer hover:(bg-gray-500 text-white) text-gray-500 flex items-center justify-center">&times;</div>
+                    </div>
+                    </template>
+                </div>
+                <pre v-if="current !== 'nope'" class="text-sm text-white p-2 px-4 shadow-xl h-136 overflow-y-scroll"><code v-html="tabs[current]" /></pre>
+                <div v-else class="text-lg font-bold flex items-center justify-center h-136 overflow-y-scroll text-gray-800 p-2 px-4 shadow-xl">
+                    You've closed everything, eh?
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
