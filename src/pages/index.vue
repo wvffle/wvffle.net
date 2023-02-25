@@ -4,14 +4,6 @@ import Prism from 'prismjs'
 import 'prismjs/components/prism-markdown.js'
 import 'prismjs/themes/prism-tomorrow.css'
 
-import { useToast } from "vue-toastification"
-
-const toast = useToast()
-toast('Czy Adrianowi uda sie przyjac 15 nowych czlonkow?', {
-    type: 'error',
-    position: 'bottom-center'
-})
-
 const devSFC = `<script setup lang="ts">
     import { computed, readonly, reactive } from 'vue'
 
