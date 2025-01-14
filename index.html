@@ -9,9 +9,133 @@
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "418ed38b35024d2aba366954cc9198ac"}'></script>
     <!-- End Cloudflare Web Analytics -->
+    <style>
+      :root {
+        --color-contact: darkgray;
+        --color-name: #333;
+      }
+    
+      /* readex-pro-latin-400-normal */
+      @font-face {
+        font-family: 'Readex Pro';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/readex-pro@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/readex-pro@latest/latin-400-normal.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    
+      /* readex-pro-latin-700-normal */
+      @font-face {
+        font-family: 'Readex Pro';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/readex-pro@latest/latin-700-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/readex-pro@latest/latin-700-normal.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: 'Readex Pro', sans-serif;
+      }
+    
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+    
+      @media (min-width: 768px) {
+        .container {
+          flex-direction: row;
+        }
+      }
+    
+      .half {
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      .name {
+        display: flex;
+        align-items: center;
+        color: var(--color-name);
+      }
+    
+      .name div {
+        font-size: 2em;
+        font-weight: 700;
+        margin-left: 1rem;
+      }
+    
+      .name img {
+        height: 8em;
+      }
+    
+      .contact-list {
+        list-style-type: none;
+        padding: 0;
+      }
+    
+      .contact-item {}
+    
+      .contact-item svg {
+        color: var(--color-contact);
+      }
+    
+      .contact-item a,
+      .contact-item span {
+        color: var(--color-contact);
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
+      }
+    </style>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+  <body class="container">
+    <div class="half">
+      <div class="name">
+        <img src="logo.svg" />
+        <div>
+          <div>Kasper</div>
+          <div>Seweryn</div>
+        </div>
+      </div>
+    </div>
+    <div class="half">
+      <ul class="contact-list">
+        <li class="contact-item">
+          <a href="https://matrix.to/#/@wvffle:juniorjpdj.pl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
+              <g fill="currentColor">
+                <path d="M216 40v176H40V40Z" opacity=".2" />
+                <path
+                  d="M72 216a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8V40a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16H48v160h16a8 8 0 0 1 8 8M216 32h-24a8 8 0 0 0 0 16h16v160h-16a8 8 0 0 0 0 16h24a8 8 0 0 0 8-8V40a8 8 0 0 0-8-8m-32 88a32 32 0 0 0-56-21.13a31.93 31.93 0 0 0-40.71-6.15A8 8 0 0 0 72 96v64a8 8 0 0 0 16 0v-40a16 16 0 0 1 32 0v40a8 8 0 0 0 16 0v-40a16 16 0 0 1 32 0v40a8 8 0 0 0 16 0Z" />
+              </g>
+            </svg>
+            @wvffle:juniorjpdj.pl
+          </a>
+        </li>
+        <li class="contact-item">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
+              <g fill="currentColor">
+                <path d="m224 96l-78.55 56h-34.9L32 96l96-64Z" opacity=".2" />
+                <path
+                  d="m228.44 89.34l-96-64a8 8 0 0 0-8.88 0l-96 64A8 8 0 0 0 24 96v104a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V96a8 8 0 0 0-3.56-6.66M96.72 152L40 192v-80.47Zm16.37 8h29.82l56.63 40H56.46Zm46.19-8L216 111.53V192ZM128 41.61l81.91 54.61l-67 47.78h-29.8l-67-47.78Z" />
+              </g>
+            </svg>
+            admin[at]wvffle[dot]net
+          </span>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
+
